@@ -5,10 +5,12 @@ let runningTotal=0
 let preoperator = null
 const btns = document.querySelectorAll('.btn')
  btns.forEach(btn =>{btn.addEventListener('click', e => {
-    //buffer = e.target.textContent;
     handleImput(e.target.innerText)
 
-})}) 
+})
+
+})  
+
 
 
 
@@ -33,18 +35,24 @@ function workOnSymbols(value){
     preoperator = null
  } else if ( value === '+' ||value === '-'|| value === '/'||value === '%' || value === '*'){
     preoperator = value;
-    runningTotal = parseInt(buffer);
+    runningTotal = parseFloat(buffer);
     buffer = '0'
     
-}else if (value === '='){
-     if(preoperator != null){
-         console.log(`preop is ${preoperator}`)
-         let intBuffer = parseInt(buffer);
-         operate(preoperator, runningTotal, intBuffer)
+}   else if (value === '←'){
+        if(buffer.length > 1)
+            buffer = buffer.slice(0, -1) 
+}   else if (value === '.'){
+    buffer += value;
+ }  else if (value === '='){
+        if(preoperator != null){
+            console.log(`preop is ${preoperator}`)
+            let intBuffer = parseFloat(buffer);
+            console.log(intBuffer)
+            operate(preoperator, runningTotal, intBuffer)
 
-     } else{ 
-         console.log('no preop yet')
-     }
+        } else{ 
+            console.log('no preop yet')
+        }
 } 
 }
 
@@ -76,7 +84,8 @@ function operate(operator,num,num2){
 let renderer = () => display.textContent = buffer;
 
 function add(num, num2){
-    console.log('done ')
+   //runningTotal = 0;
+  // intBuffer = 0
     return buffer = num+num2
 }
 function rest(num, num2){
