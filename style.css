@@ -6,6 +6,7 @@
 .wrapper{
     margin: auto;
     width: 50%;
+    height: 100vh;
     padding: 10px;
     border:solid 1px goldenrod;
 }
@@ -15,11 +16,12 @@
     width: 300px;
     height: 400px;
     margin: auto;
-    margin-top: 2rem;
+    margin-top: 10rem;
 }
 .title{   
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 3rem;
+    font-size: 36px;
 }
 .display{
     color: #FFFFFF;
@@ -43,6 +45,10 @@
     background-color: grey;
     color: #FFFFFF;
     border: none;
+}
+.btn:hover{
+    cursor:pointer;
+    background-color: darkgray;
 }
 .calc-btn{
     background-color: orange;

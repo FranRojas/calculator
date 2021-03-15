@@ -1,24 +1,96 @@
-let total = 0
-const display =  document.querySelector('.display');
-const show = ()=>{
-    console.log(btn)
+const display = document.querySelector('.display')
+let buffer='0'
+let runningTotal=0
+
+let preoperator = null
+const btns = document.querySelectorAll('.btn')
+ btns.forEach(btn =>{btn.addEventListener('click', e => {
+    //buffer = e.target.textContent;
+    handleImput(e.target.innerText)
+
+})}) 
+
+
+
+//action made for everyclick
+
+function handleImput(value){
+   if(isNaN(parseInt(value))){
+            workOnSymbols(value);
+   } else {
+       workOnNumbers(value);
+   }
+   renderer();
 }
 
-const btn= document.querySelector('.btn').addEventListener('click',function(event){
+
+// actions made every time a symbol is clicked
+
+function workOnSymbols(value){
+ if(value === 'A/C'){
+    buffer='0'
+    runningTotal=0
+    preoperator = null
+ } else if ( value === '+' ||value === '-'|| value === '/'||value === '%' || value === '*'){
+    preoperator = value;
+    runningTotal = parseInt(buffer);
+    buffer = '0'
     
-        console.log(event.target.innerText)})
+}else if (value === '='){
+     if(preoperator != null){
+         console.log(`preop is ${preoperator}`)
+         let intBuffer = parseInt(buffer);
+         operate(preoperator, runningTotal, intBuffer)
 
-    
-    
-
-
-
-
-const addition = (a,b)=> {
-    total= a+b;
-    return display.textContent = total
+     } else{ 
+         console.log('no preop yet')
+     }
+} 
 }
-const multiply = (a,b) => {
-    total = a * b;
-    return display.textContent = total
+
+// actions made every time a number is clicked
+
+function workOnNumbers(value){
+    if(buffer === '0'){
+        buffer = value
+       
+    } else{
+        buffer += value;
+       
+    }
+}
+
+function operate(operator,num,num2){
+    if(operator == "+") {
+        return add(num,num2)
+    } else if (operator == "-"){
+        return rest(num, num2)
+    } else if (operator == "/"){
+        return divide(num,num2)
+    } else if (operator == "*"){
+        return multiply(num,num2)
+    }else if (operator == "%"){
+        return percentage(num,num2)
+    }
+}
+let renderer = () => display.textContent = buffer;
+
+function add(num, num2){
+    console.log('done ')
+    return buffer = num+num2
+}
+function rest(num, num2){
+    return buffer = num - num2
+}
+function multiply(num, num2){
+    return buffer = num * num2
+}
+function divide(num, num2){
+    if(num2 == 0){
+        return buffer = `Error`
+    }
+    return buffer = num / num2
+}
+function percentage(num, num2){
+    return buffer = (num * num2)/100
 }
