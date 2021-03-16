@@ -1,15 +1,14 @@
 const display = document.querySelector('.display')
 let buffer='0'
 let runningTotal=0
-
 let preoperator = null
 const btns = document.querySelectorAll('.btn')
  btns.forEach(btn =>{btn.addEventListener('click', e => {
     handleImput(e.target.innerText)
-
-})
-
-})  
+        }
+      )
+    }
+  )  
 
 
 
@@ -42,12 +41,10 @@ function workOnSymbols(value){
         if(buffer.length > 1)
             buffer = buffer.slice(0, -1) 
 }   else if (value === '.'){
-    buffer += value;
+        buffer += value;
  }  else if (value === '='){
         if(preoperator != null){
-            console.log(`preop is ${preoperator}`)
             let intBuffer = parseFloat(buffer);
-            console.log(intBuffer)
             operate(preoperator, runningTotal, intBuffer)
 
         } else{ 
@@ -97,9 +94,13 @@ function multiply(num, num2){
 function divide(num, num2){
     if(num2 == 0){
         return buffer = `Error`
+    } else {
+        buffer = num / num2
+        return buffer = +buffer.toFixed(2)
     }
-    return buffer = num / num2
+     
 }
 function percentage(num, num2){
-    return buffer = (num * num2)/100
+     buffer = (num * num2)/100;
+     return buffer = +buffer.toFixed(2)
 }
