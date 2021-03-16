@@ -60,7 +60,12 @@ function workOnNumbers(value){
         buffer = value
        
     } else{
-        buffer += value;
+        if(buffer.length >10){
+            return  
+        }else {
+            buffer += value;
+        }
+       
        
     }
 }
